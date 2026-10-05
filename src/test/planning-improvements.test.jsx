@@ -76,18 +76,18 @@ describe('Vehículos, opciones factibles y accesos reales del Óvalo Musical', (
     expect(result.current.schedule.route.costTotal).toBe(morning.costTotal);
   });
 
-  it('deriva cinco grupos reales de acceso y un cierre total sin inventar intersecciones', () => {
+  it('deriva cinco grupos reales de acceso sin ofrecer un cierre total ni inventar intersecciones', () => {
     const groups = getOvalAccesses(demoRoadNetwork);
     const ring = demoRoadNetwork.edges.filter(edge => edge.streetName === 'Óvalo Musical');
     const ringNodes = new Set(ring.flatMap(edge => [edge.from, edge.to]));
-    expect(groups).toHaveLength(6);
+    expect(groups).toHaveLength(5);
+    expect(groups.some(group => group.total)).toBe(false);
     const boundaries = demoRoadNetwork.edges.filter(edge => ringNodes.has(edge.from) !== ringNodes.has(edge.to));
     expect(groups.filter(group => !group.total).flatMap(group => group.edgeIds).sort()).toEqual(boundaries.map(edge => edge.id).sort());
     for (const group of groups.filter(group => !group.total)) {
       expect(group.segments.every(edge => group.label.includes(edge.streetName))).toBe(true);
       expect(group.label).not.toMatch(/osm-|\d+ m/);
     }
-    expect(groups.find(group => group.total).edgeIds.sort()).toEqual(ring.map(edge => edge.id).sort());
   });
 
   it('un cierre parcial mantiene otros accesos y encuentra el desvío real; el cierre total puede aislar', () => {
@@ -105,7 +105,8 @@ describe('Vehículos, opciones factibles y accesos reales del Óvalo Musical', (
     expect(result.current.schedule.route.edgeIds.some(id => west.edgeIds.includes(id))).toBe(false);
     expect(result.current.schedule.route.distanceTotal).toBeGreaterThan(initial.distanceTotal);
     act(() => result.current.resetCondition());
-    const total = result.current.ovalAccesses.find(group => group.total);
+    // Engine regression only: a total closure is no longer offered in the UI.
+    const total = { id: 'test-total', label: 'Cierre total', edgeIds: result.current.network.edges.filter(edge => edge.streetName === 'Óvalo Musical').map(edge => edge.id) };
     act(() => result.current.setDemoProblem({ closed: true, closureMode: 'total', accessId: total.id, streetName: total.label, edgeIds: total.edgeIds }));
     act(() => result.current.recalculateDemo());
     expect(result.current.schedule.route.status).toBe('unreachable');
@@ -123,9 +124,9 @@ describe('Vehículos, opciones factibles y accesos reales del Óvalo Musical', (
     await user.click(screen.getByRole('button', { name: 'CALCULAR RUTA' }));
     expect(screen.getByText('7:30 a. m.', { selector: '.schedule-result b' })).toBeVisible();
     expect(screen.getAllByRole('button', { name: /Tramo \d+: Óvalo Musical/ })).toHaveLength(1);
-    await user.click(screen.getByRole('button', { name: 'Cierre en Óvalo Musical' }));
+    await user.click(screen.getByRole('button', { name: 'Restricción en Óvalo Musical' }));
     expect(document.querySelector('.road-segment-options')).not.toBeInTheDocument();
-    const radio = screen.getByRole('radio', { name: 'Conexión con Avenida Atahualpa · oeste' });
+    const radio = screen.getByRole('radio', { name: 'Restringir conexión con Avenida Atahualpa · oeste' });
     fireEvent.mouseEnter(radio.parentElement);
     expect(document.querySelector('.leaflet-sitrac-access-highlight-pane path')).toBeInTheDocument();
     fireEvent.mouseLeave(radio.parentElement);

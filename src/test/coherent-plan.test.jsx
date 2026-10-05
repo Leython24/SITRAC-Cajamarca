@@ -107,8 +107,8 @@ describe('Un único plan de horario y ruta', () => {
     await user.click(screen.getByText('VER POR QUÉ'));
     expect(screen.getByText(/La franja 8:00 a. m. utiliza un incremento de tráfico DEMO de 0%/)).toBeVisible();
     expect(screen.queryByText(/Además, la vía bloqueada fue excluida/)).not.toBeInTheDocument();
-    await user.click(screen.getByRole('button', { name: 'Cierre en Óvalo Musical' }));
-    await user.click(screen.getByRole('radio', { name: /Conexión con Avenida Vía de Evitamiento Sur/ }));
+    await user.click(screen.getByRole('button', { name: 'Restricción en Óvalo Musical' }));
+    await user.click(screen.getByRole('radio', { name: /Restringir conexión con Avenida Vía de Evitamiento Sur/ }));
     expect(document.querySelector('.leaflet-sitrac-blocked-pane path[stroke="#dc2626"]')).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: '¿QUÉ CAMBIÓ?' })).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'RECALCULAR RUTA' })).toBeEnabled();
@@ -125,7 +125,7 @@ describe('Un único plan de horario y ruta', () => {
 
   it('Resultados alterna la situación original y la propuesta del mismo plan', async () => {
     const user = await openPlan();
-    await user.click(screen.getByRole('button', { name: 'Cierre en Óvalo Musical' }));
+    await user.click(screen.getByRole('button', { name: 'Restricción en Óvalo Musical' }));
     await user.click(screen.getByText('Otras vías de la ruta'));
     await user.click(screen.getByRole('radio', { name: 'Jirón Amalia Puga' }));
     await user.click(screen.getByRole('button', { name: 'RECALCULAR RUTA' }));
@@ -138,11 +138,11 @@ describe('Un único plan de horario y ruta', () => {
     expect(document.querySelector('.geo-results')).toHaveAttribute('data-view', 'before');
     expect(screen.getByText('RUTA ORIGINAL', { exact: true })).toBeVisible();
     expect(document.querySelector('.leaflet-sitrac-blocked-pane path')).not.toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Tramo 17: Jirón Amalia Puga' })).toHaveAttribute('stroke', '#334155');
+    expect(screen.getAllByRole('button', { name: /^Tramo \d+: Jirón Amalia Puga$/ })[0]).toHaveAttribute('stroke', '#334155');
     await user.click(screen.getByRole('button', { name: 'Propuesta SITRAC', exact: true }));
     expect(document.querySelector('.geo-results')).toHaveAttribute('data-view', 'after');
     expect(document.querySelector('.leaflet-sitrac-blocked-pane path[stroke="#dc2626"]')).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Tramo 17: Jirón Amalia Puga' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /^Tramo \d+: Jirón Amalia Puga$/ })).not.toBeInTheDocument();
   });
 
   it('la exposición permite detenerse en doce pasos y exige calcular antes de avanzar', async () => {

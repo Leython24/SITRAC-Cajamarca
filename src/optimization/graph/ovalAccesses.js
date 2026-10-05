@@ -13,9 +13,9 @@ export function getOvalAccesses(network) {
     const angle = Math.atan2(exterior.latitude - center[0], (exterior.longitude - center[1]) * Math.cos(center[0] * Math.PI / 180));
     const sector = sectors[(Math.round(angle / (Math.PI / 4)) + 8) % 8];
     const id = `${edge.streetName}:${sector}`;
-    if (!groups.has(id)) groups.set(id, { id, label: `Conexión con ${edge.streetName} · ${sector}`, edgeIds: [], segments: [] });
+    if (!groups.has(id)) groups.set(id, { id, name: `Conexión con ${edge.streetName} · ${sector}`, label: `Restringir conexión con ${edge.streetName} · ${sector}`, edgeIds: [], segments: [] });
     groups.get(id).edgeIds.push(edge.id);
     groups.get(id).segments.push(edge);
   }
-  return [...groups.values(), { id: 'oval-total', label: 'Cierre total del Óvalo Musical', edgeIds: ring.map(edge => edge.id), segments: ring, total: true }];
+  return [...groups.values()];
 }

@@ -10,7 +10,7 @@ const explanations = [
   'Selecciona un destino o elígelo sobre una vía del mapa.',
   'Dijkstra utiliza las condiciones de esa franja. Pulsa CALCULAR RUTA.',
   'Explora la línea azul y el recorrido: cada tramo identifica una calle seleccionada.',
-  'Abre Cierre en Óvalo Musical y selecciona un acceso real de la red.',
+  'Abre Restricción en Óvalo Musical y selecciona un acceso real de la red.',
   'La calle seleccionada ya aparece roja: el cierre está listo para aplicarse.',
   'Pulsa RECALCULAR RUTA. Dijkstra excluirá las conexiones cerradas.',
   'Gris: ruta anterior. Rojo: cierre. Azul: nueva ruta, si queda una alternativa disponible.',

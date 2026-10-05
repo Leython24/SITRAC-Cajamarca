@@ -29,14 +29,14 @@ export default function RoadConditionControl({ open, setOpen, onFocus, onHighlig
     onFocus(edges); onChange();
   };
   const selectAccess = access => {
-    setDemoProblem({ closed: true, closureMode: access.total ? 'total' : 'access', accessId: access.id, streetName: access.label, edgeIds: access.edgeIds });
+    setDemoProblem({ closed: true, closureMode: 'access', accessId: access.id, streetName: access.name, edgeIds: access.edgeIds });
     onFocus(access.segments); onChange();
   };
-  const streetChoices = uniqueStreets.map(group => <label key={group.id}><input type="radio" name="road-condition" checked={condition?.type === type && !condition.accessId && condition.streetName === group.streetName}
+  const streetChoices = uniqueStreets.filter(group => type === 'congestion' || group.streetName !== 'Óvalo Musical').map(group => <label key={group.id}><input type="radio" name="road-condition" checked={condition?.type === type && !condition.accessId && condition.streetName === group.streetName}
     disabled={type === 'congestion' && originalPlanningRoads.some(edge => edge.streetName === group.streetName && edge.factor >= congestionConfig.factors.congested)}
     onChange={() => selectStreet(group.streetName)} />{group.streetName}</label>);
   return <div className="planner-disclosure"><p>SIMULAR CONDICIÓN VIAL</p>
-    <div className="condition-actions"><Button onClick={() => chooseType('congestion')}>Aumentar congestión</Button><Button onClick={() => chooseType('closure')}>Cierre en Óvalo Musical</Button></div>
+    <div className="condition-actions"><Button onClick={() => chooseType('congestion')}>Aumentar congestión</Button><Button onClick={() => chooseType('closure')}>Restricción en Óvalo Musical</Button></div>
     {open && <div className="closure-options">
       {type === 'congestion' ? <><strong>Selecciona una calle de la ruta actual</strong>{streetChoices}</> : <>
         <strong>SIMULAR RESTRICCIÓN EN ÓVALO MUSICAL</strong><span>Selecciona el acceso restringido:</span>
