@@ -1,0 +1,78 @@
+/* Geographic map replaces Stitch artwork; SITRAC's frame and tokens are retained. */
+.geographic-map { position: relative; isolation: isolate; overflow: hidden; min-width: 0; border-radius: var(--radius-lg); background: var(--surface-container); }
+.sitrac-leaflet-map { height: 100%; width: 100%; z-index: 0; font-family: var(--font-body); }
+.geo-home { height: 500px; }
+.geo-traffic { height: max(620px, calc(100dvh - 220px)); border-radius: 0; }
+.geo-results { height: 520px; }
+.geo-simulation { height: 280px; }
+.simple-map-toolbar { gap: var(--space-sm); }
+.map-toolbar-heading { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: var(--space-md); }
+.map-toolbar-heading > strong { font-size: var(--font-lg); }
+.map-toolbar-heading label { display: flex; align-items: center; gap: var(--space-sm); color: var(--text-secondary); font-size: var(--font-sm); }
+.simple-road-inspector .inspector-heading h2 { margin: var(--space-sm) 0; }
+.simple-road-inspector .inspector-body { gap: var(--space-base); }
+.simple-road-facts { margin: 0; }
+.simple-road-facts > div { padding: var(--space-sm) 0; border-bottom: 1px solid var(--border); }
+.simple-road-facts dt { font-size: var(--font-sm); color: var(--text-secondary); }
+.simple-road-facts dd { margin: 2px 0 0; font-weight: 500; }
+.geo-map-controls { position: absolute; left: 12px; top: 12px; z-index: 800; background: white; border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-subtle); overflow: hidden; }
+.geo-map-controls button { display: grid; place-items: center; width: 36px; height: 36px; border-bottom: 1px solid var(--border); background: white; }
+.geo-map-controls button:last-child { border-bottom: 0; color: var(--primary); }
+.geo-map-controls button:hover { background: var(--surface-low); }
+.geo-map-controls button:focus-visible { outline-offset: -3px; }
+.geo-demo-label { position: absolute; left: 12px; bottom: 30px; max-width: calc(100% - 24px); z-index: 800; padding: 5px 8px; border-radius: var(--radius-sm); background: rgb(255 255 255 / 95%); font-size: var(--font-xs); color: var(--text-secondary); pointer-events: none; box-shadow: var(--shadow-subtle); }
+.route-legend { display: flex; flex-wrap: wrap; gap: var(--space-sm); position: absolute; top: 12px; right: 12px; max-width: calc(100% - 76px); z-index: 800; border: 1px solid var(--border); border-radius: var(--radius-sm); background: rgb(255 255 255 / 95%); padding: 7px 9px; box-shadow: var(--shadow-subtle); pointer-events: none; }
+.route-legend > span { display: flex; align-items: center; gap: 6px; font-size: var(--font-xs); }
+.route-legend i { width: 24px; border-top: 3px solid; }
+.route-legend .route-dashed { border-top-style: dashed; }
+.geo-view-label { position: absolute; left: 12px; top: 132px; z-index: 800; padding: 6px 8px; background: white; border-radius: var(--radius-sm); box-shadow: var(--shadow-subtle); font-size: var(--font-xs); pointer-events: none; }
+.geo-tile-notice { position: absolute; top: 60px; right: 12px; z-index: 800; background: var(--warning-bg); border-radius: var(--radius-sm); padding: 8px; font-size: var(--font-xs); max-width: calc(100% - 80px); }
+.freight-marker, .destination-marker { display: grid; place-items: center; border: 2px solid white; border-radius: var(--radius-pill); background: var(--primary); color: white; box-shadow: 0 2px 5px rgb(15 23 42 / 25%); }
+.freight-marker .icon { font-size: 20px; }
+.destination-marker { background: #7c3aed; }
+.map-legend { position: absolute; top: 12px; left: 12px; z-index: 800; display: grid; gap: 5px; padding: 8px 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: rgb(255 255 255 / 95%); box-shadow: var(--shadow-subtle); font-size: var(--font-xs); }
+.map-legend span { display: flex; align-items: center; gap: 6px; }
+.map-legend i { width: 18px; border-top: 3px solid currentColor; }
+.map-legend .origin { color: #15803d; }
+.map-legend .destination { color: #7c3aed; }
+.map-legend .original { color: #334155; }
+.map-legend .recommended { color: #2563eb; }
+.map-legend .blocked { color: #dc2626; border-top-style: dashed; }
+.destination-marker .icon { font-size: 16px; }
+.freight-marker:hover, .freight-marker:focus-visible { background: var(--primary-container); }
+.map-popup-content { min-width: 180px; max-width: 235px; color: var(--text); font-family: var(--font-body); font-size: var(--font-sm); line-height: 1.5; }
+.map-popup-content > strong { display: block; font-size: var(--font-lg); }
+.popup-demo { display: block; color: var(--secondary); font-size: 10px; margin: 3px 0 8px; }
+.map-popup-content dl { margin: 0; }
+.map-popup-content dt { margin-top: 8px; color: var(--text-secondary); font-size: 10px; }
+.map-popup-content dd { margin: 0; }
+.map-popup-content p { margin: 8px 0; }
+.map-popup-content a { display: inline-block; margin-top: 10px; color: var(--primary); }
+.sitrac-leaflet-map .leaflet-popup-content-wrapper { border-radius: var(--radius-lg); }
+.sitrac-leaflet-map .leaflet-popup-close-button { color: var(--secondary); }
+.sitrac-leaflet-map .leaflet-control-attribution { font-family: var(--font-body); font-size: 10px; }
+.demo-road:focus-visible { outline: none; stroke-width: 13px; filter: drop-shadow(0 0 2px var(--primary)); }
+.simple-road-inspector .technical-list dd { max-width: 50%; }
+@media (min-width: 1051px) {
+  .traffic-workspace { grid-template-columns: minmax(0, 1fr) 300px; height: calc(100dvh - 195px); min-height: 480px; }
+  .geo-traffic { height: 100%; }
+  .simple-road-inspector { max-height: 100%; overflow-y: auto; }
+  .simple-road-facts > div { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 0; }
+  .simple-road-facts dd { text-align: right; font-size: 12px; }
+  .simple-road-inspector .inspector-heading { padding: 14px 16px; }
+  .simple-road-inspector .inspector-heading h2 { font-size: 20px; margin: 4px 0; }
+  .simple-road-inspector .inspector-body { gap: 8px; padding: 14px 16px 70px; }
+  .simple-road-inspector .inspector-actions { margin: 0; }
+}
+@media (max-width: 1050px) { .geo-traffic { height: 570px; } .simple-road-inspector { grid-template-columns: 1fr 2fr; } }
+@media (max-width: 767px) {
+  .geo-home { height: 400px; }
+  .geo-results { height: 450px; }
+  .geo-traffic { height: 500px; }
+  .geo-simulation { height: 270px; }
+  .map-toolbar-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .map-toolbar-heading label { flex-wrap: wrap; }
+  .geo-demo-label { font-size: 9px; }
+  .route-legend { flex-direction: column; gap: 4px; }
+  .route-legend > span { font-size: 10px; }
+}

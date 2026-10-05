@@ -1,0 +1,9 @@
+import Button from '../ui/Button';
+import { formatTime, formatTimeRange } from '../../utils/formatTime';
+import { demoRoadNetwork } from '../../data/mock/roadNetwork';
+import { configurationLabel } from '../../data/mock/vehiclePresentation';
+export default function VehicleTable({ vehicles, selected, onSelect }) {
+  return <section className="vehicle-table-panel" aria-label="Registro de vehículos DEMO"><div className="table-caption"><span>Vehículos de carga · DEMO ACADÉMICO</span><small>Elige un vehículo y pulsa PLANIFICAR</small></div><div className="table-scroll"><table className="vehicle-table"><thead><tr>{['Vehículo', 'Tipo de carga', 'Procedencia', 'Ingreso', 'Destino', 'Llegada', 'Ventana', 'Acción'].map(label => <th key={label}>{label}</th>)}</tr></thead><tbody>
+    {vehicles.map(vehicle => <tr key={vehicle.id} className={selected === vehicle.id ? 'selected-row' : ''} onClick={() => onSelect(vehicle.id)}><td><button className="vehicle-id" aria-label={`Seleccionar vehículo ${vehicle.id}`} onClick={() => onSelect(vehicle.id)}>{vehicle.id}</button><small>{vehicle.type}</small><small>Configuración: {configurationLabel(vehicle)}</small></td><td>{vehicle.cargoType ?? vehicle.priority}</td><td>{vehicle.originCity}</td><td>{demoRoadNetwork.nodes.find(point => point.id === vehicle.entryPointId)?.displayName}</td><td>Punto de entrega en zona centro · DEMO</td><td>{formatTime(vehicle.arrival)}</td><td>{formatTimeRange(vehicle.window)}</td><td><Button to={`/planificar-viaje?vehiculo=${vehicle.id}`} variant="primary" aria-label={`Planificar viaje con ${vehicle.id}`}>PLANIFICAR</Button></td></tr>)}
+  </tbody></table>{!vehicles.length && <div className="empty-state"><h3>No hay vehículos que coincidan</h3><p>Restablece los filtros para ver los registros DEMO.</p></div>}</div></section>;
+}

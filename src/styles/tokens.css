@@ -1,0 +1,54 @@
+/* From the supplied DESIGN.md + the approved Stitch screenshots.
+   Screenshot/export colors take precedence over the conflicting prose palette. */
+:root {
+  --surface: #f8f9ff;
+  --surface-lowest: #ffffff;
+  --surface-low: #eff4ff;
+  --surface-container: #e5eeff;
+  --surface-high: #dce9ff;
+  --surface-highest: #d3e4fe;
+  --primary: #0037b0;
+  --primary-container: #1d4ed8;
+  --on-primary: #ffffff;
+  --text: #0b1c30;
+  --text-secondary: #434655;
+  --secondary: #565e74;
+  --secondary-container: #dae2fd;
+  --outline: #747686;
+  --border: #e2e8f0;
+  --outline-variant: #c4c5d7;
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+  --traffic-fluid: #16a34a;
+  --traffic-moderate: #eab308;
+  --traffic-high: #ea580c;
+  --traffic-congested: #dc2626;
+  --traffic-blocked: #475569;
+  --warning-bg: #fef3c7;
+  --success-bg: #dcfce7;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-base: 16px;
+  --space-lg: 20px;
+  --space-xl: 32px;
+  --gutter: 20px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+  --font-body: 'Inter Variable', Inter, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-xs: 11px;
+  --font-sm: 12px;
+  --font-base: 13px;
+  --font-lg: 15px;
+  --heading-sm: 15px;
+  --heading-md: 18px;
+  --heading-lg: 24px;
+  --heading-xl: 32px;
+  --sidebar-width: 288px;
+  --header-height: 64px;
+  --shadow-subtle: 0 1px 2px rgb(15 23 42 / 5%);
+  --shadow-floating: 0 4px 12px rgb(0 55 176 / 20%);
+}

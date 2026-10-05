@@ -1,0 +1,28 @@
+/* Small additions within the existing SITRAC panels; retain design tokens. */
+.routing-content { display: flex; flex-direction: column; gap: var(--space-md); min-width: 0; }
+.routing-content .section-header { margin: 0; }
+.simulation-result .routing-content h2 { margin: 0; }
+.route-endpoint-controls, .route-condition-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-md); }
+.route-condition-controls { padding: var(--space-md); background: var(--surface-low); border-radius: var(--radius-lg); }
+.route-block-toggle { display: flex; align-items: center; gap: var(--space-sm); font-size: var(--font-sm); grid-column: 1 / -1; }
+.route-actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.route-actions > .button { min-height: 40px; }
+.route-summary { display: flex; flex-direction: column; gap: var(--space-md); }
+.route-comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-md); }
+.route-comparison > div { padding: var(--space-md); background: var(--surface-low); border-radius: var(--radius-lg); }
+.route-comparison > div:last-child { background: var(--surface-container); }
+.route-comparison h3, .route-summary h3 { font-size: var(--font-sm); }
+.route-comparison dl { margin: var(--space-sm) 0 0; font-size: var(--font-sm); }
+.route-comparison dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-xs); }
+.route-comparison dd { margin: 0; font-weight: 600; }
+.route-explanation { padding: var(--space-md); background: var(--surface-low); border-left: 3px solid var(--primary); border-radius: var(--radius-sm); font-size: var(--font-sm); }
+.route-segments { padding-left: 20px; margin: 8px 0; font-size: var(--font-sm); line-height: 1.7; }
+.io-technique { padding: var(--space-md); border: 1px solid var(--border); border-radius: var(--radius-lg); font-size: var(--font-sm); }
+.io-technique h3 { font-size: var(--font-lg); margin-bottom: var(--space-sm); }
+.io-technique p + p { margin-top: var(--space-sm); }
+.io-flow { color: var(--primary); line-height: 1.8; }
+.route-technical-table { overflow-x: auto; }
+.route-technical-table table { width: 100%; border-collapse: collapse; font-size: var(--font-xs); }
+.route-technical-table th, .route-technical-table td { padding: 8px; text-align: left; border-bottom: 1px solid var(--border); }
+.geo-optimization { height: 400px; }
+@media (max-width: 767px) { .route-endpoint-controls, .route-condition-controls, .route-comparison { grid-template-columns: 1fr; } .geo-optimization { height: 350px; } }
